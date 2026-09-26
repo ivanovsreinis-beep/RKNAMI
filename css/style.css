@@ -832,7 +832,13 @@ h1, h2, h3 {
   font-size: 0.9375rem;
   font-weight: 600;
 }
+.field-row { display: grid; gap: var(--s-3); }
+@media (min-width: 600px) {
+  .field-row { grid-template-columns: 1fr 1fr; }
+}
+.req { color: var(--accent); }
 .field input,
+.field select,
 .field textarea {
   width: 100%;
   padding: 0.75rem 0.9rem;
@@ -843,19 +849,60 @@ h1, h2, h3 {
   font: inherit;
   line-height: 1.5;
 }
+.field select {
+  appearance: none;
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235B6670' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  cursor: pointer;
+}
 .field textarea { resize: vertical; min-height: 8.5rem; }
+.field input::placeholder,
+.field textarea::placeholder { color: var(--muted); opacity: 0.8; }
 .field input:hover,
+.field select:hover,
 .field textarea:hover { border-color: #B9C2BF; }
 .field input:focus-visible,
+.field select:focus-visible,
 .field textarea:focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: 1px;
   border-color: var(--focus);
-  background: var(--paper);
+  background-color: var(--paper);
 }
 .field [aria-invalid="true"] { border-color: #B3261E; }
 
+.field-check {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem;
+  align-items: start;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+.field-check input {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin: 0.05rem 0 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+.field-check input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.field-check input[aria-invalid="true"] { outline: 2px solid #B3261E; outline-offset: 2px; }
+.field-check a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 0.2em;
+}
+.field-check a:hover { text-decoration-color: var(--accent); }
+.field-check a:active { color: var(--accent-strong); }
+.form-note { margin: calc(var(--s-1) * -1) 0 0; font-size: var(--step--1); color: var(--muted); }
+
 .contact-form .btn { justify-self: start; }
+.contact-form .btn:disabled { opacity: 0.7; cursor: progress; transform: none; }
 .form-status { margin: 0; min-height: 1.7em; font-size: var(--step--1); color: var(--ink-2); }
 .form-status.is-error { color: #B3261E; }
 .form-status.is-ok { color: var(--accent-strong); }
