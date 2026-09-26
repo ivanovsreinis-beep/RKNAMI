@@ -1027,6 +1027,34 @@ h1, h2, h3 {
 }
 .js .reveal.is-visible { opacity: 1; transform: none; }
 
+/* Peldošā WhatsApp poga — zem galvenes (z-index 100), virs pārējā satura */
+.whatsapp-fab {
+  position: fixed;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(20px, env(safe-area-inset-bottom));
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25D366;
+  color: #FFFFFF;
+  box-shadow: 0 2px 4px rgba(34, 42, 49, 0.12), 0 8px 20px -6px rgba(18, 140, 126, 0.45);
+  transition: transform 0.3s var(--spring), box-shadow 0.3s var(--ease-out);
+}
+.whatsapp-fab svg { width: 30px; height: 30px; }
+.whatsapp-fab:hover {
+  transform: scale(1.08);
+  box-shadow: 0 3px 6px rgba(34, 42, 49, 0.14), 0 14px 28px -8px rgba(18, 140, 126, 0.55);
+}
+.whatsapp-fab:active { transform: scale(0.95); }
+.whatsapp-fab:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+@media print { .whatsapp-fab { display: none; } }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
