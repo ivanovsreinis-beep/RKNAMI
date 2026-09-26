@@ -459,32 +459,69 @@
     </div>
 
     <!--
-      Kontaktforma. Bez backend tā atver e-pasta programmu (mailto).
-      Formspree/EmailJS integrācijai ieraksti adresi data-endpoint, piem.:
-      data-endpoint="https://formspree.io/f/XXXXXXX"
+      Kontaktforma → POST /api/contact (Vercel serverless, api/contact.js) → Mailjet → info@rknami.lv.
+      Lauku kļūdu teksti ir .field-error elementos, kopējie ziņojumi — data-msg-* atribūtos.
     -->
     <form class="contact-form reveal" id="contact-form" novalidate
-          data-endpoint=""
-          data-mailto="info@rknami.lv"
-          data-subject="Ziņa no rknami.lv"
-          data-msg-invalid="Lūdzu, aizpildiet visus laukus un pārbaudiet e-pasta adresi."
+          method="post" action="/api/contact"
+          data-msg-invalid="Lūdzu, izlabojiet atzīmētos laukus."
           data-msg-sending="Sūta…"
-          data-msg-sent="Paldies! Ziņa nosūtīta — atbildēsim tuvākajā laikā."
-          data-msg-mailto="Atvērām jūsu e-pasta programmu ar sagatavotu ziņu. Atliek to nosūtīt."
-          data-msg-error="Ziņu neizdevās nosūtīt. Lūdzu, rakstiet uz info@rknami.lv vai zvaniet +371 26609366.">
-      <div class="field">
-        <label for="f-name">Vārds</label>
-        <input id="f-name" name="name" type="text" autocomplete="name" required>
+          data-msg-sent="Ziņa veiksmīgi nosūtīta! Paldies, sazināsimies ar Jums tuvākajā laikā."
+          data-msg-rate="Pārāk daudz ziņu īsā laikā. Lūdzu, mēģiniet vēlreiz pēc dažām minūtēm vai rakstiet uz info@rknami.lv."
+          data-msg-error="Ziņu neizdevās nosūtīt. Lūdzu, mēģiniet vēlreiz vai sazinieties ar mums pa e-pastu info@rknami.lv.">
+      <p class="form-note">Ar <span aria-hidden="true">*</span> atzīmētie lauki ir obligāti.</p>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="f-name">Vārds, uzvārds <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required minlength="2" maxlength="100" aria-describedby="f-name-error">
+          <p class="field-error" id="f-name-error" hidden>Ievadiet savu vārdu un uzvārdu.</p>
+        </div>
+        <div class="field">
+          <label for="f-email">E-pasts <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="254" aria-describedby="f-email-error">
+          <p class="field-error" id="f-email-error" hidden>Ievadiet derīgu e-pasta adresi, piemēram, vards@epasts.lv.</p>
+        </div>
       </div>
-      <div class="field">
-        <label for="f-email">E-pasts</label>
-        <input id="f-email" name="email" type="email" autocomplete="email" required>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="f-phone">Tālrunis</label>
+          <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="30" aria-describedby="f-phone-error">
+          <p class="field-error" id="f-phone-error" hidden>Pārbaudiet tālruņa numuru — atļauti cipari, atstarpes un +.</p>
+        </div>
+        <div class="field">
+          <label for="f-address">Ēkas adrese</label>
+          <input id="f-address" name="address" type="text" autocomplete="street-address" maxlength="200" aria-describedby="f-address-error">
+          <p class="field-error" id="f-address-error" hidden>Adrese ir pārāk gara.</p>
+        </div>
       </div>
+
       <div class="field">
-        <label for="f-message">Ziņa</label>
-        <textarea id="f-message" name="message" rows="5" required></textarea>
+        <label for="f-subject">Ziņas tēma <span class="req" aria-hidden="true">*</span></label>
+        <input id="f-subject" name="subject" type="text" required minlength="2" maxlength="150" aria-describedby="f-subject-error">
+        <p class="field-error" id="f-subject-error" hidden>Norādiet ziņas tēmu.</p>
       </div>
-      <button class="btn btn-primary btn-lg" type="submit">Nosūtīt</button>
+
+      <div class="field">
+        <label for="f-message">Ziņojums <span class="req" aria-hidden="true">*</span></label>
+        <textarea id="f-message" name="message" rows="6" required minlength="10" maxlength="5000" aria-describedby="f-message-error"></textarea>
+        <p class="field-error" id="f-message-error" hidden>Uzrakstiet ziņojumu (vismaz 10 rakstzīmes).</p>
+      </div>
+
+      <!-- Honeypot: cilvēkiem neredzams; ja aizpildīts, serveris ziņu nesūta -->
+      <div class="hp" aria-hidden="true">
+        <label for="f-website">Neaizpildiet šo lauku</label>
+        <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="field field-consent">
+        <input id="f-consent" name="consent" type="checkbox" required aria-describedby="f-consent-error">
+        <label for="f-consent">Esmu iepazinies ar <a href="/privatuma-politika" target="_blank" rel="noopener">privātuma politiku</a> un piekrītu savu personas datu apstrādei, lai SIA "RK NAMI" varētu atbildēt uz manu pieprasījumu. <span class="req" aria-hidden="true">*</span></label>
+        <p class="field-error" id="f-consent-error" hidden>Lai nosūtītu ziņu, nepieciešama jūsu piekrišana.</p>
+      </div>
+
+      <button class="btn btn-primary btn-lg" type="submit">Nosūtīt ziņu</button>
       <p class="form-status" role="status" aria-live="polite"></p>
     </form>
   </div>
@@ -503,7 +540,7 @@
     </a>
     <div class="footer-legal">
       <p>© 2026 SIA "RK NAMI". Visas tiesības aizsargātas.</p>
-      <p>Reģ. Nr. 40203156404</p>
+      <p>Reģ. Nr. 40203156404 · <a href="/privatuma-politika">Privātuma politika</a></p>
     </div>
   </div>
 </footer>

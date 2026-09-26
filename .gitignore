@@ -4,6 +4,13 @@ CLAUDE.txt
 RK-NAMI-majaslapas-prompts.md
 Gemini_Generated_Image_*.jpg
 
+# Secrets / build
+.env
+.env.*
+!.env.example
+node_modules/
+.vercel/
+
 # OS / editor
 Thumbs.db
 Desktop.ini

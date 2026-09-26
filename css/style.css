@@ -854,8 +854,71 @@ h1, h2, h3 {
   background: var(--paper);
 }
 .field [aria-invalid="true"] { border-color: #B3261E; }
+.field [aria-invalid="true"]:focus-visible { outline-color: #B3261E; }
 
+.form-note { margin: 0; font-size: var(--step--1); color: var(--muted); }
+.req { color: var(--accent-strong); font-weight: 700; }
+
+/* Divi lauki blakus, kad formai pietiek platuma */
+.field-row {
+  display: grid;
+  gap: var(--s-3);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12.5rem), 1fr));
+}
+
+.field-error {
+  margin: 0;
+  font-size: var(--step--1);
+  line-height: 1.45;
+  color: #B3261E;
+}
+
+/* GDPR piekrišana */
+.field-consent {
+  grid-template-columns: auto 1fr;
+  column-gap: 0.75rem;
+  align-items: start;
+  padding-top: var(--s-1);
+}
+.field-consent input[type="checkbox"] {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin: 0.2rem 0 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+.field-consent input[type="checkbox"]:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.field-consent input[aria-invalid="true"] { outline: 2px solid #B3261E; outline-offset: 2px; }
+.field-consent label {
+  font-family: var(--font-body);
+  font-stretch: normal;
+  font-variation-settings: normal;
+  font-weight: 400;
+  font-size: var(--step--1);
+  line-height: 1.55;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.field-consent label a {
+  color: var(--accent-strong);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.field-consent label a:hover { color: var(--ink); }
+.field-consent .field-error { grid-column: 2; }
+
+/* Honeypot — paslēpts no cilvēkiem un ekrāna lasītājiem */
+.hp {
+  position: absolute !important;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.contact-form { position: relative; }
 .contact-form .btn { justify-self: start; }
+.contact-form .btn:disabled { opacity: 0.7; cursor: progress; transform: none; }
 .form-status { margin: 0; min-height: 1.7em; font-size: var(--step--1); color: var(--ink-2); }
 .form-status.is-error { color: #B3261E; }
 .form-status.is-ok { color: var(--accent-strong); }
@@ -863,6 +926,54 @@ h1, h2, h3 {
 @media (min-width: 900px) {
   .contact-grid { grid-template-columns: 1fr 1fr; gap: var(--s-6); }
 }
+
+/* ---------- 10b. Privātuma politika (/privatuma-politika) ---------- */
+.legal-head {
+  padding-block: var(--s-5) var(--s-4);
+  background: var(--plaster);
+  border-bottom: 1px solid var(--rule);
+}
+.legal-head .section-title { margin-bottom: var(--s-2); }
+.legal-updated { margin: 0; color: var(--muted); font-size: var(--step--1); }
+
+.legal-body { padding-block: var(--s-5) var(--section-y); }
+.legal-body > * { max-width: 42rem; }
+.legal-intro { font-size: var(--step-1); line-height: 1.6; color: var(--ink-2); }
+.legal-body section {
+  margin-top: var(--s-4);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--rule);
+}
+.legal-body h2 {
+  font-size: var(--step-2);
+  font-stretch: 112%;
+  font-variation-settings: "wdth" 112;
+  letter-spacing: -0.015em;
+  margin-bottom: var(--s-2);
+}
+.legal-body p, .legal-body li { color: var(--ink-2); }
+.legal-body ul { margin: 0 0 var(--s-2); }
+.legal-body li {
+  position: relative;
+  padding-left: 1.4rem;
+  margin-bottom: 0.35rem;
+}
+.legal-body li::before {
+  content: "";
+  position: absolute;
+  left: 0.2rem;
+  top: 0.8em;
+  width: 0.55rem;
+  height: 2px;
+  background: var(--accent);
+}
+.legal-body a:not(.btn) {
+  color: var(--accent-strong);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.legal-body a:not(.btn):hover { color: var(--ink); }
+.legal-back { margin-top: var(--s-5); }
 
 /* ---------- 11. Footer ---------- */
 .site-footer {
@@ -888,6 +999,8 @@ h1, h2, h3 {
 .footer-brand img:first-child { height: 36px; width: auto; }
 .footer-brand img:last-child { height: 14px; width: auto; }
 .footer-legal p { margin: 0; }
+.footer-legal a { color: var(--on-ink); text-underline-offset: 0.25em; }
+.footer-legal a:hover { color: var(--paper); }
 .site-footer :focus-visible { outline-color: var(--on-ink); }
 
 @media (min-width: 900px) {

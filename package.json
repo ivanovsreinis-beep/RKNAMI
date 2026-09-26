@@ -1,0 +1,9 @@
+{
+  "name": "rknami-lv",
+  "version": "1.0.0",
+  "private": true,
+  "description": "RK NAMI mājaslapa (statiska lapa + Vercel serverless /api/contact)",
+  "dependencies": {
+    "node-mailjet": "^6.0.6"
+  }
+}
