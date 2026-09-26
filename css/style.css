@@ -887,23 +887,11 @@ h1, h2, h3 {
 .footer-brand:active { transform: scale(0.98); }
 .footer-brand img:first-child { height: 36px; width: auto; }
 .footer-brand img:last-child { height: 14px; width: auto; }
-.footer-links { display: flex; flex-wrap: wrap; gap: var(--s-1) var(--s-3); }
-.footer-links a {
-  color: var(--on-ink);
-  text-decoration: none;
-  font-family: var(--font-display);
-  font-stretch: 112%;
-  font-variation-settings: "wdth" 112;
-  font-weight: 500;
-}
-.footer-links a:hover { text-decoration: underline; text-underline-offset: 0.3em; }
-.footer-links a:active { opacity: 0.7; }
 .footer-legal p { margin: 0; }
 .site-footer :focus-visible { outline-color: var(--on-ink); }
 
 @media (min-width: 900px) {
-  .footer-inner { grid-template-columns: auto 1fr auto; align-items: center; gap: var(--s-5); }
-  .footer-links { justify-content: center; }
+  .footer-inner { grid-template-columns: auto 1fr; align-items: center; gap: var(--s-5); }
   .footer-legal { text-align: right; }
 }
 
