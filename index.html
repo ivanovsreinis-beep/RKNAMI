@@ -1,0 +1,519 @@
+<!doctype html>
+<!--
+  RK NAMI — one-page mājaslapa
+  Valodas: šis fails ir latviešu versija (/). Krievu un angļu versijas
+  paredzēts veidot kā /ru/index.html un /en/index.html ar to pašu struktūru —
+  viss lapas teksts atrodas tikai šajā HTML failā (arī formas ziņojumi
+  data-* atribūtos), CSS un JS failos teksta nav.
+-->
+<html lang="lv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ===== SEO ===== -->
+  <title>RK NAMI — ēku apsaimniekošana un pārvaldīšana Rīgā, Jūrmalā, Mārupē, Siguldā</title>
+  <meta name="description" content="SIA &quot;RK NAMI&quot; profesionāli apsaimnieko dzīvojamās mājas Rīgā, Jūrmalā, Mārupē, Siguldā un tuvākajā apkārtnē — vairāk nekā 15 gadu pieredze un individuāla pieeja katram namam.">
+  <link rel="canonical" href="https://rknami.lv/">
+  <!-- Kad būs citas valodas:
+  <link rel="alternate" hreflang="lv" href="https://rknami.lv/">
+  <link rel="alternate" hreflang="ru" href="https://rknami.lv/ru/">
+  <link rel="alternate" hreflang="en" href="https://rknami.lv/en/">
+  -->
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="lv_LV">
+  <meta property="og:site_name" content="RK NAMI">
+  <meta property="og:title" content="RK NAMI — Jūsu īpašums. Mūsu atbildība.">
+  <meta property="og:description" content="Dzīvojamo māju apsaimniekošana Rīgā, Jūrmalā, Mārupē, Siguldā un apkārtnē. Vairāk nekā 15 gadu pieredze.">
+  <meta property="og:url" content="https://rknami.lv/">
+  <meta property="og:image" content="https://rknami.lv/assets/og-image.png">
+
+  <!-- Favicon (no logotipa) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#222A31">
+
+  <!-- Šrifti -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+
+  <link rel="stylesheet" href="css/style.css">
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+
+<!-- Ikonu komplekts (Lucide) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-building" viewBox="0 0 24 24"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+    <symbol id="i-scale" viewBox="0 0 24 24"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip-link" href="#saturs">Pāriet uz saturu</a>
+
+<!-- ============================================================
+     1. NAVIGĀCIJA (header)
+     ============================================================ -->
+<header class="site-header" id="header">
+  <div class="container header-inner">
+    <a class="brand" href="#sakums" aria-label="RK NAMI — uz sākumu">
+      <img class="brand-mark" src="assets/logo-mark.png" alt="" width="446" height="374">
+      <img class="brand-word" src="assets/logo-word.png" alt="RK NAMI" width="664" height="93">
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
+      <span class="visually-hidden">Atvērt izvēlni</span>
+    </button>
+
+    <nav class="site-nav" id="site-nav" aria-label="Galvenā izvēlne">
+      <ul class="nav-list">
+        <li><a href="#sakums">Sākums</a></li>
+        <li><a href="#par-mums">Par mums</a></li>
+        <li><a href="#pakalpojumi">Pakalpojumi</a></li>
+        <li><a href="#objekti">Objekti</a></li>
+        <li><a href="#parnemsana">Pārņemšana</a></li>
+        <li><a href="#jautajumi">BUJ</a></li>
+        <li><a href="#kontakti">Kontakti</a></li>
+      </ul>
+      <a class="btn btn-primary nav-cta" href="#kontakti">Sazināties</a>
+    </nav>
+  </div>
+</header>
+
+<main id="saturs">
+
+<!-- ============================================================
+     2. HERO
+     ============================================================ -->
+<section class="hero" id="sakums" aria-labelledby="hero-title">
+  <div class="container hero-copy">
+    <h1 class="hero-title" id="hero-title">
+      <span>Jūsu īpašums.</span>
+      <span>Mūsu atbildība.</span>
+    </h1>
+    <p class="hero-lead">SIA "RK NAMI" profesionāli apsaimnieko dzīvojamās mājas Rīgā, Jūrmalā, Mārupē, Siguldā un tuvākajā apkārtnē — ar vairāk nekā 15 gadu pieredzi un individuālu pieeju katram namam.</p>
+  </div>
+
+  <!-- Ielas fasāžu līnijzīmējums: Jūrmalas villa, Rīgas jūgendstils,
+       paneļu māja, jauns daudzdzīvokļu nams, Mārupes rindu mājas -->
+  <div class="elevation" aria-hidden="true">
+    <svg viewBox="0 0 1440 330" preserveAspectRatio="xMinYMax slice" focusable="false">
+      <defs>
+        <pattern id="w-villa" x="78" y="232" width="46" height="1" patternUnits="userSpaceOnUse">
+          <rect x="0" y="0" width="22" height="34" class="ln"/>
+        </pattern>
+        <pattern id="w-jug" x="330" y="96" width="44" height="42" patternUnits="userSpaceOnUse">
+          <rect x="10" y="6" width="22" height="30" class="ln"/>
+        </pattern>
+        <pattern id="w-panel" x="640" y="138" width="46" height="30" patternUnits="userSpaceOnUse">
+          <rect x="10" y="9" width="26" height="14" class="ln"/>
+          <path d="M0 29.5H46" class="ln-thin"/>
+        </pattern>
+        <pattern id="w-new" x="1010" y="150" width="36" height="38" patternUnits="userSpaceOnUse">
+          <rect x="4" y="5" width="28" height="28" class="ln"/>
+        </pattern>
+      </defs>
+
+      <!-- Koki (liepas) -->
+      <g class="bld" style="--i:6">
+        <circle cx="284" cy="262" r="20" class="ln"/><path d="M284 282v26" class="ln"/>
+        <circle cx="596" cy="254" r="26" class="ln"/><path d="M596 280v28" class="ln"/>
+        <circle cx="1216" cy="266" r="20" class="ln"/><path d="M1216 286v22" class="ln"/>
+      </g>
+
+      <!-- Jūrmalas koka villa -->
+      <g class="bld" style="--i:0">
+        <rect x="62" y="214" width="180" height="94" class="ln"/>
+        <path d="M50 214 146 150 254 214" class="ln"/>
+        <path d="M146 150 146 214 254 214Z" class="solid"/>
+        <rect x="190" y="160" width="40" height="54" class="ln"/>
+        <path d="M184 160 210 116 236 160Z" class="ln"/>
+        <rect x="78" y="232" width="114" height="34" fill="url(#w-villa)"/>
+        <rect x="200" y="252" width="26" height="56" class="ln"/>
+        <path d="M62 280H190" class="ln-thin"/>
+        <rect x="200" y="176" width="20" height="24" class="ln"/>
+      </g>
+
+      <!-- Rīgas jūgendstila nams ar vara kupolu -->
+      <g class="bld" style="--i:1">
+        <rect x="318" y="84" width="252" height="224" class="ln"/>
+        <path d="M384 84C384 50 410 34 432 26 454 34 480 50 480 84" class="ln"/>
+        <circle cx="432" cy="62" r="11" class="ln"/>
+        <rect x="524" y="46" width="46" height="38" class="ln"/>
+        <path d="M520 46C520 20 547 6 547 6S574 20 574 46Z" class="accent"/>
+        <path d="M547 6V-6" class="ln"/>
+        <rect x="330" y="96" width="220" height="168" fill="url(#w-jug)"/>
+        <rect x="408" y="96" width="48" height="168" class="solid"/>
+        <path d="M318 264H570" class="ln"/>
+        <path d="M340 308V278H380V308M420 308V278H468V308M508 308V278H548V308" class="ln"/>
+      </g>
+
+      <!-- Paneļu daudzdzīvokļu māja -->
+      <g class="bld" style="--i:2">
+        <rect x="640" y="128" width="322" height="180" class="ln"/>
+        <rect x="640" y="138" width="322" height="150" fill="url(#w-panel)"/>
+        <rect x="778" y="128" width="46" height="180" class="solid"/>
+        <path d="M640 128V118H962V128" class="ln"/>
+        <rect x="788" y="276" width="26" height="32" class="ln-inv"/>
+      </g>
+
+      <!-- Jauns daudzdzīvokļu nams -->
+      <g class="bld" style="--i:3">
+        <path d="M1000 308V112H1150V146H1190V308Z" class="ln"/>
+        <rect x="1010" y="150" width="136" height="114" fill="url(#w-new)"/>
+        <path d="M1150 146 1190 146 1190 308 1150 308Z" class="solid"/>
+        <path d="M1000 140H1150" class="ln"/>
+        <rect x="1030" y="272" width="54" height="36" class="ln"/>
+      </g>
+
+      <!-- Mārupes rindu mājas -->
+      <g class="bld" style="--i:4">
+        <path d="M1246 308V226L1296 186 1346 226V308" class="ln"/>
+        <path d="M1296 186 1346 226V308H1320V226Z" class="solid"/>
+        <path d="M1346 308V226L1390 192 1434 226V308" class="ln"/>
+        <rect x="1262" y="240" width="22" height="28" class="ln"/>
+        <rect x="1360" y="240" width="22" height="28" class="ln"/>
+        <rect x="1398" y="252" width="22" height="56" class="ln"/>
+        <rect x="1284" y="278" width="22" height="30" class="ln"/>
+      </g>
+
+      <!-- Pamatlīnija -->
+      <path class="ground" d="M0 309H1440"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ============================================================
+     3. PAR MUMS
+     ============================================================ -->
+<section class="section about" id="par-mums" aria-labelledby="about-title">
+  <div class="container about-grid">
+    <div class="about-text reveal">
+      <h2 class="section-title" id="about-title">Par RK NAMI</h2>
+      <p>SIA "RK NAMI" ir nekustamā īpašuma apsaimniekošanas uzņēmums ar vairāk nekā 15 gadu pieredzi dzīvojamo māju pārvaldībā. Šobrīd apsaimniekojam vairāk nekā 15 dzīvojamās mājas Rīgā, Jūrmalā, Mārupē, Siguldā un apkārtējos novados.</p>
+      <p>Mūsu pieeja balstās uz caurskatāmību, operatīvu reaģēšanu un ilgtermiņa attiecībām ar māju iedzīvotājiem un valdēm. Katram namam pieejam individuāli — no ikdienas administrēšanas līdz sarežģītiem tehniskiem un juridiskiem jautājumiem.</p>
+    </div>
+
+    <dl class="facts reveal">
+      <div class="fact">
+        <dt class="fact-value">15+</dt>
+        <dd class="fact-label">gadu pieredze nozarē</dd>
+      </div>
+      <div class="fact">
+        <dt class="fact-value">15+</dt>
+        <dd class="fact-label">apsaimniekotas ēkas</dd>
+      </div>
+      <div class="fact">
+        <dt class="fact-value fact-value-text">Rīga · Mārupe · Jūrmala · Sigulda</dt>
+        <dd class="fact-label">un apkārtne</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<!-- ============================================================
+     4. PAKALPOJUMI
+     ============================================================ -->
+<section class="section services" id="pakalpojumi" aria-labelledby="services-title">
+  <div class="container">
+    <h2 class="section-title reveal" id="services-title">Ko mēs piedāvājam</h2>
+
+    <ul class="service-grid">
+      <li class="service reveal" data-stagger="0">
+        <span class="service-icon"><svg class="icon" aria-hidden="true"><use href="#i-building"/></svg></span>
+        <h3>Nama apsaimniekošana</h3>
+        <p>Ikdienas apsaimniekošana, komunālo un citu rēķinu apstrāde, dzīvokļu īpašnieku kopsapulču un aptauju organizēšana, dokumentu un protokolu kārtošana.</p>
+      </li>
+      <li class="service reveal" data-stagger="1">
+        <span class="service-icon"><svg class="icon" aria-hidden="true"><use href="#i-wrench"/></svg></span>
+        <h3>Tehniskā apkope un remonti</h3>
+        <p>Jumtu, fasāžu, iekšējo komunikāciju un koplietošanas telpu tehniskais stāvoklis, plānoto un ārkārtas remontu koordinēšana, sadarbība ar pārbaudītiem darbuzņēmējiem.</p>
+      </li>
+      <li class="service reveal" data-stagger="0">
+        <span class="service-icon"><svg class="icon" aria-hidden="true"><use href="#i-scale"/></svg></span>
+        <h3>Juridiskais atbalsts</h3>
+        <p>Konsultācijas un dokumentu sagatavošana atbilstoši Dzīvokļa īpašuma likumam — kopsapulces, balsojumi, aptaujas anketas, pārvaldīšanas līgumi.</p>
+      </li>
+      <li class="service reveal" data-stagger="1">
+        <span class="service-icon"><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg></span>
+        <h3>Portfeļa un objektu pārvaldība</h3>
+        <p>Pilna cikla pārvaldība vairāku māju grupām — no finanšu plānošanas līdz iedzīvotāju komunikācijai vairākās valodās.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================================================
+     5. OBJEKTI / PORTFELIS
+     ============================================================ -->
+<section class="section portfolio" id="objekti" aria-labelledby="portfolio-title">
+  <div class="container portfolio-grid">
+    <div class="portfolio-text reveal">
+      <h2 class="section-title" id="portfolio-title">Mūsu pārvaldībā</h2>
+      <p>Apsaimniekojam dzīvojamās mājas dažādos Rīgas un apkārtnes rajonos. Katram objektam pieejam individuāli, ņemot vērā ēkas tehnisko stāvokli un iedzīvotāju vajadzības.</p>
+
+      <p class="portfolio-count"><strong>15+</strong> objekti</p>
+
+      <!-- Šeit vēlāk var pievienot konkrētu adrešu sarakstu -->
+      <ul class="area-list">
+        <li>Rīga</li>
+        <li>Mārupe</li>
+        <li>Jūrmala</li>
+        <li>Sigulda</li>
+      </ul>
+    </div>
+
+    <!-- Shematiska karte: Rīgas jūras līcis, Daugava, Lielupe -->
+    <figure class="map reveal">
+      <svg viewBox="0 0 600 440" role="img" aria-labelledby="map-title">
+        <title id="map-title">Shematiska karte: Rīga, Mārupe, Jūrmala un Sigulda</title>
+        <defs><clipPath id="map-clip"><rect width="600" height="440" rx="10"/></clipPath></defs>
+        <g clip-path="url(#map-clip)">
+        <path class="map-sea" d="M0 0H600V0 20C560 40 520 70 470 104 430 132 400 150 368 160 300 176 220 186 150 196 90 204 40 212 0 220Z"/>
+        <path class="map-coast" d="M0 220C40 212 90 204 150 196 220 186 300 176 368 160 400 150 430 132 470 104 520 70 560 40 600 20"/>
+        <text class="map-water" x="330" y="70">Rīgas jūras līcis</text>
+        <!-- Daugava -->
+        <path class="map-river" d="M368 160C384 190 400 214 416 240 440 280 490 320 540 350 570 368 590 380 600 386"/>
+        <text class="map-water" x="486" y="318" transform="rotate(38 486 318)">Daugava</text>
+        <!-- Lielupe -->
+        <path class="map-river" d="M0 268C60 260 130 250 200 238 260 226 310 202 340 172"/>
+        <text class="map-water" x="40" y="292">Lielupe</text>
+        </g>
+
+        <g class="map-place" transform="translate(422 250)">
+          <circle r="16" class="map-halo"/><circle r="7" class="map-dot"/>
+          <text x="22" y="6">Rīga</text>
+        </g>
+        <g class="map-place" transform="translate(150 212)">
+          <circle r="14" class="map-halo"/><circle r="6" class="map-dot"/>
+          <text x="-40" y="-26">Jūrmala</text>
+        </g>
+        <g class="map-place" transform="translate(330 318)">
+          <circle r="16" class="map-halo"/><circle r="7" class="map-dot"/>
+          <text x="22" y="6">Mārupe</text>
+        </g>
+        <!-- Sigulda: shematiski uz ZA no Rīgas, iekšzemē -->
+        <g class="map-place" transform="translate(548 196)">
+          <circle r="16" class="map-halo"/><circle r="7" class="map-dot"/>
+          <text x="-22" y="6" text-anchor="end">Sigulda</text>
+        </g>
+      </svg>
+    </figure>
+  </div>
+</section>
+
+<!-- ============================================================
+     6. MĀJAS PĀRŅEMŠANA
+     ============================================================ -->
+<section class="section takeover" id="parnemsana" aria-labelledby="takeover-title">
+  <div class="container">
+    <header class="takeover-head reveal">
+      <p class="eyebrow">Mājas pārņemšana</p>
+      <h2 class="section-title" id="takeover-title">Pāreja pie jauna pārvaldnieka ir vienkāršāka, nekā šķiet</h2>
+      <p class="takeover-lead">Lielāko darba daļu uzņemamies mēs. Dzīvokļu īpašniekiem jāpieņem tikai viens lēmums — pārējo sakārtojam mēs.</p>
+    </header>
+
+    <ol class="steps">
+      <li class="step reveal" data-stagger="0">
+        <span class="step-num" aria-hidden="true">01</span>
+        <div class="step-card">
+          <p class="step-time"><span class="visually-hidden">1. solis, </span>1. nedēļa</p>
+          <h3>Iepazīšanās un mājas apskate</h3>
+          <p>Tiekamies ar mājas vecāko vai iniciatīvas grupu, apsekojam ēku un iepazīstamies ar situāciju. Bez maksas un saistībām.</p>
+        </div>
+      </li>
+      <li class="step reveal" data-stagger="1">
+        <span class="step-num" aria-hidden="true">02</span>
+        <div class="step-card">
+          <p class="step-time"><span class="visually-hidden">2. solis, </span>2.–3. nedēļa</p>
+          <h3>Individuāls piedāvājums</h3>
+          <p>Sagatavojam piedāvājumu ar skaidru pārvaldīšanas maksu un prioritāro darbu sarakstu tieši jūsu mājai.</p>
+        </div>
+      </li>
+      <li class="step reveal" data-stagger="2">
+        <span class="step-num" aria-hidden="true">03</span>
+        <div class="step-card">
+          <p class="step-time"><span class="visually-hidden">3. solis, </span>Kopības lēmums</p>
+          <h3>Dzīvokļu īpašnieku balsojums</h3>
+          <p>Palīdzam sagatavot kopsapulces vai rakstiskās aptaujas dokumentus. Lēmumu pieņem ar dzīvokļu īpašnieku balsu vairākumu.</p>
+        </div>
+      </li>
+      <li class="step reveal" data-stagger="3">
+        <span class="step-num" aria-hidden="true">04</span>
+        <div class="step-card">
+          <p class="step-time"><span class="visually-hidden">4. solis, </span>Pārņemšana</p>
+          <h3>Dokumentu un lietu pārņemšana</h3>
+          <p>Paši sazināmies ar iepriekšējo pārvaldnieku un pārņemam mājas lietu, tehnisko dokumentāciju, uzkrājumus un līgumus.</p>
+        </div>
+      </li>
+      <li class="step reveal" data-stagger="4">
+        <span class="step-num" aria-hidden="true">05</span>
+        <div class="step-card">
+          <p class="step-time"><span class="visually-hidden">5. solis, </span>Pirmās 90 dienas</p>
+          <h3>Stabils sākums</h3>
+          <p>Pilna tehniskā apsekošana, pārvaldīšanas plāna projekts un tikšanās ar iedzīvotājiem, lai iepazītos un uzklausītu.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="takeover-note reveal">
+      <p>Parasti viss process aizņem 1–3 mēnešus — atkarībā no esošā pārvaldīšanas līguma nosacījumiem.</p>
+      <a class="btn btn-primary btn-lg" href="#kontakti">Pieteikties konsultācijai</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     7. BIEŽĀK UZDOTIE JAUTĀJUMI
+     ============================================================ -->
+<section class="section faq" id="jautajumi" aria-labelledby="faq-title">
+  <div class="container faq-grid">
+    <h2 class="section-title reveal" id="faq-title">Biežāk uzdotie jautājumi</h2>
+
+    <div class="faq-list reveal">
+      <details class="faq-item">
+        <summary>Cik maksā ēkas apsaimniekošana?<svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+        <div class="faq-answer">
+          <p>Maksa ir atkarīga no ēkas tehniskā stāvokļa, platības, vajadzīgo pakalpojumu apjoma un īpašnieku izvēlētā pārvaldīšanas modeļa. Kad saņemsim pamatinformāciju par ēku, sagatavosim konkrētu piedāvājumu.</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>Vai pārvaldāt arī nelielas ēkas?<svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+        <div class="faq-answer">
+          <p>Jā. Ēkas lielums nav vienīgais kritērijs. Svarīgāk ir izveidot ēkai atbilstošu pārvaldīšanas modeli.</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>Vai palīdzat organizēt remontdarbus?<svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+        <div class="faq-answer">
+          <p>Jā. Organizējam gan ikdienas remontdarbus, gan lielākus tehniskos projektus, no problēmas izvērtēšanas līdz rezultāta pārbaudei.</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>Vai īpašnieki var saņemt informāciju par paveiktajiem darbiem?<svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+        <div class="faq-answer">
+          <p>Jā. Mūsu mērķis ir, lai īpašnieki saprotamā veidā saņemtu informāciju par ēkas aktualitātēm un paveiktajiem darbiem. Šim nolūkam izstrādājam arī digitālu īpašnieku portālu.</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>Vai palīdzat pārņemt ēku no cita apsaimniekotāja?<svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+        <div class="faq-answer">
+          <p>Jā. Izvērtējam esošo situāciju un organizējam visu pārņemšanas procesu. Soļus skatiet sadaļā <a href="#parnemsana">„Vēlaties mainīt apsaimniekotāju?“</a></p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>Kā pieteikt problēmu ēkā?<svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+        <div class="faq-answer">
+          <p>Īpašniekiem nodrošinām saziņas kanālus problēmu un jautājumu pieteikšanai. Steidzamā gadījumā zvaniet <a class="nowrap" href="tel:+37126609366">+371 26609366</a> vai rakstiet uz <a href="mailto:info@rknami.lv">info@rknami.lv</a>.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     8. KONTAKTI
+     ============================================================ -->
+<section class="section contact" id="kontakti" aria-labelledby="contact-title">
+  <div class="container contact-grid">
+    <div class="contact-info reveal">
+      <h2 class="section-title" id="contact-title">Sazināsimies</h2>
+      <p>Ja meklējat uzticamu apsaimniekotāju savai mājai vai vēlaties pārrunāt esošu sadarbību — sazinieties ar mums.</p>
+
+      <address class="details">
+        <p class="details-company">SIA "RK NAMI"</p>
+        <ul>
+          <li>
+            <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
+            <span><span class="visually-hidden">Tālrunis: </span><a href="tel:+37126609366">+371 26609366</a></span>
+          </li>
+          <li>
+            <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>
+            <span><span class="visually-hidden">E-pasts: </span><a href="mailto:info@rknami.lv">info@rknami.lv</a></span>
+          </li>
+          <li>
+            <svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>
+            <span>Juridiskā adrese: "Ozolkalni", Mārupes pag., Mārupes nov., <span class="nowrap">LV-2167</span></span>
+          </li>
+          <li>
+            <svg class="icon" aria-hidden="true"><use href="#i-file"/></svg>
+            <span>Reģ. Nr. 40203156404</span>
+          </li>
+        </ul>
+      </address>
+    </div>
+
+    <!--
+      Kontaktforma. Bez backend tā atver e-pasta programmu (mailto).
+      Formspree/EmailJS integrācijai ieraksti adresi data-endpoint, piem.:
+      data-endpoint="https://formspree.io/f/XXXXXXX"
+    -->
+    <form class="contact-form reveal" id="contact-form" novalidate
+          data-endpoint=""
+          data-mailto="info@rknami.lv"
+          data-subject="Ziņa no rknami.lv"
+          data-msg-invalid="Lūdzu, aizpildiet visus laukus un pārbaudiet e-pasta adresi."
+          data-msg-sending="Sūta…"
+          data-msg-sent="Paldies! Ziņa nosūtīta — atbildēsim tuvākajā laikā."
+          data-msg-mailto="Atvērām jūsu e-pasta programmu ar sagatavotu ziņu. Atliek to nosūtīt."
+          data-msg-error="Ziņu neizdevās nosūtīt. Lūdzu, rakstiet uz info@rknami.lv vai zvaniet +371 26609366.">
+      <div class="field">
+        <label for="f-name">Vārds</label>
+        <input id="f-name" name="name" type="text" autocomplete="name" required>
+      </div>
+      <div class="field">
+        <label for="f-email">E-pasts</label>
+        <input id="f-email" name="email" type="email" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label for="f-message">Ziņa</label>
+        <textarea id="f-message" name="message" rows="5" required></textarea>
+      </div>
+      <button class="btn btn-primary btn-lg" type="submit">Nosūtīt</button>
+      <p class="form-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================
+     9. FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <a class="footer-brand" href="#sakums" aria-label="RK NAMI — uz sākumu">
+      <img src="assets/logo-mark-light.png" alt="" width="446" height="374">
+      <img src="assets/logo-word-light.png" alt="RK NAMI" width="664" height="93">
+    </a>
+    <nav aria-label="Kājenes izvēlne">
+      <ul class="footer-links">
+        <li><a href="#par-mums">Par mums</a></li>
+        <li><a href="#pakalpojumi">Pakalpojumi</a></li>
+        <li><a href="#kontakti">Kontakti</a></li>
+      </ul>
+    </nav>
+    <div class="footer-legal">
+      <p>© 2026 SIA "RK NAMI". Visas tiesības aizsargātas.</p>
+      <p>Reģ. Nr. 40203156404</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

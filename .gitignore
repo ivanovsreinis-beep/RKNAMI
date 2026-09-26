@@ -1,0 +1,12 @@
+# Working files — not part of the site
+temporary screenshots/
+CLAUDE.txt
+RK-NAMI-majaslapas-prompts.md
+Gemini_Generated_Image_*.jpg
+
+# OS / editor
+Thumbs.db
+Desktop.ini
+.DS_Store
+.vscode/
+.claude/
