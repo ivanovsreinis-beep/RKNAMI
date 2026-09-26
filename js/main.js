@@ -4,7 +4,7 @@
    3. Mobilā izvēlne
    4. Aktīvā sadaļa izvēlnē
    5. Parādīšanās ritinot
-   6. Pieteikuma forma (api/contact.php, Node, Formspree vai mailto) */
+   6. Kontaktforma (Formspree/EmailJS vai mailto) */
 
 (function () {
   'use strict';
@@ -87,50 +87,27 @@
     var form = document.getElementById('contact-form');
     var status = form.querySelector('.form-status');
     var submit = form.querySelector('button[type="submit"]');
-    var submitLabel = submit.textContent;
-    var fields = form.querySelectorAll('.field input, .field select, .field textarea, .field-check input');
 
     function say(text, kind) {
       status.textContent = text;
       status.className = 'form-status' + (kind ? ' is-' + kind : '');
     }
 
-    function isValid(field) {
-      if (field.type === 'checkbox') return !field.required || field.checked;
-      var value = field.value.trim();
-      if (field.required && !value) return false;
-      return !value || field.checkValidity();
-    }
-
     function validate() {
-      var first = null;
-      fields.forEach(function (field) {
-        var valid = isValid(field);
-        if (valid) field.removeAttribute('aria-invalid');
-        else field.setAttribute('aria-invalid', 'true');
-        if (!valid && !first) first = field;
+      var ok = true;
+      form.querySelectorAll('input, textarea').forEach(function (field) {
+        var valid = field.value.trim() !== '' && field.checkValidity();
+        field.setAttribute('aria-invalid', String(!valid));
+        if (!valid && ok) { ok = false; field.focus(); }
       });
-      if (first) first.focus();
-      return !first;
+      return ok;
     }
 
-    function onEdit(e) {
-      if (e.target.getAttribute('aria-invalid') === 'true' && isValid(e.target)) {
+    form.addEventListener('input', function (e) {
+      if (e.target.getAttribute('aria-invalid') === 'true' && e.target.checkValidity() && e.target.value.trim()) {
         e.target.removeAttribute('aria-invalid');
       }
-    }
-    form.addEventListener('input', onEdit);
-    form.addEventListener('change', onEdit);
-
-    // Vēstules teksts mailto variantam: "Lauka nosaukums: vērtība" katrā rindā
-    function plainText() {
-      return Array.prototype.map.call(fields, function (field) {
-        var label = form.querySelector('label[for="' + field.id + '"]');
-        var name = label.textContent.replace('*', '').trim();
-        var value = field.type === 'checkbox' ? (field.checked ? field.value : '—') : (field.value.trim() || '—');
-        return name + ': ' + value;
-      }).join('\n');
-    }
+    });
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -139,22 +116,18 @@
 
       var data = new FormData(form);
       var endpoint = d.endpoint;
-      var who = data.get('name').trim() || data.get('email').trim();
 
       if (!endpoint) {
+        var body = data.get('message') + '\n\n— ' + data.get('name') + ' (' + data.get('email') + ')';
         location.href = 'mailto:' + d.mailto +
-          '?subject=' + encodeURIComponent(d.subject + ' - ' + who) +
-          '&body=' + encodeURIComponent(plainText());
+          '?subject=' + encodeURIComponent(d.subject) +
+          '&body=' + encodeURIComponent(body);
         say(d.msgMailto, 'ok');
         return;
       }
 
-      // Formspree izmanto _subject kā vēstules tematu; savi backend to aprēķina paši
-      data.append('_subject', d.subject + ' - ' + who);
-
       submit.disabled = true;
-      submit.textContent = d.msgSending;
-      say('');
+      say(d.msgSending);
       fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } })
         .then(function (res) {
           if (!res.ok) throw new Error(res.status);
@@ -162,10 +135,7 @@
           say(d.msgSent, 'ok');
         })
         .catch(function () { say(d.msgError, 'error'); })
-        .then(function () {
-          submit.disabled = false;
-          submit.textContent = submitLabel;
-        });
+        .then(function () { submit.disabled = false; });
     });
   });
 })();

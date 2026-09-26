@@ -459,76 +459,32 @@
     </div>
 
     <!--
-      Pieteikuma forma. data-endpoint norāda, kur sūtīt datus (fetch, POST):
-        api/contact.php                       — PHP hostings (noklusējums)
-        /api/contact                          — Node.js (api/contact.mjs, Vercel/Netlify)
-        https://formspree.io/f/XXXXXXX        — Formspree, bez sava servera
-      Ja data-endpoint ir tukšs, forma atver e-pasta programmu (mailto).
+      Kontaktforma. Bez backend tā atver e-pasta programmu (mailto).
+      Formspree/EmailJS integrācijai ieraksti adresi data-endpoint, piem.:
+      data-endpoint="https://formspree.io/f/XXXXXXX"
     -->
     <form class="contact-form reveal" id="contact-form" novalidate
-          data-endpoint="api/contact.php"
+          data-endpoint=""
           data-mailto="info@rknami.lv"
-          data-subject="Jauns konsultācijas pieteikums no mājaslapas"
-          data-msg-invalid="Lūdzu, aizpildiet obligātos laukus, pārbaudiet e-pasta adresi un apstipriniet piekrišanu datu apstrādei."
+          data-subject="Ziņa no rknami.lv"
+          data-msg-invalid="Lūdzu, aizpildiet visus laukus un pārbaudiet e-pasta adresi."
           data-msg-sending="Sūta…"
-          data-msg-sent="Paldies! Jūsu pieteikums ir saņemts."
+          data-msg-sent="Paldies! Ziņa nosūtīta — atbildēsim tuvākajā laikā."
           data-msg-mailto="Atvērām jūsu e-pasta programmu ar sagatavotu ziņu. Atliek to nosūtīt."
-          data-msg-error="Pieteikumu neizdevās nosūtīt. Lūdzu, mēģiniet vēlreiz vai rakstiet uz info@rknami.lv, zvaniet +371 26609366.">
-      <div class="field-row">
-        <div class="field">
-          <label for="f-name">Vārds, uzvārds</label>
-          <input id="f-name" name="name" type="text" autocomplete="name" maxlength="120">
-        </div>
-        <div class="field">
-          <label for="f-phone">Tālrunis</label>
-          <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="40" pattern="[0-9+()\s\-]{6,}">
-        </div>
-      </div>
-      <div class="field-row">
-        <div class="field">
-          <label for="f-email">E-pasts <span class="req" aria-hidden="true">*</span></label>
-          <input id="f-email" name="email" type="email" autocomplete="email" maxlength="160" required>
-        </div>
-        <div class="field">
-          <label for="f-role">Jūs esat</label>
-          <select id="f-role" name="role">
-            <option>Dzīvokļa īpašnieks</option>
-            <option>Mājas vecākais / pilnvarotā persona</option>
-            <option>Dzīvokļu īpašnieku biedrības pārstāvis</option>
-            <option>Cits</option>
-          </select>
-        </div>
-      </div>
-      <div class="field-row">
-        <div class="field">
-          <label for="f-address">Mājas adrese <span class="req" aria-hidden="true">*</span></label>
-          <input id="f-address" name="address" type="text" autocomplete="street-address" maxlength="200" placeholder="Iela, nr., pilsēta" required>
-        </div>
-        <div class="field">
-          <label for="f-units">Dzīvokļu skaits mājā</label>
-          <select id="f-units" name="units">
-            <option>Līdz 20</option>
-            <option>21–50</option>
-            <option>51–100</option>
-            <option>Vairāk nekā 100</option>
-          </select>
-        </div>
+          data-msg-error="Ziņu neizdevās nosūtīt. Lūdzu, rakstiet uz info@rknami.lv vai zvaniet +371 26609366.">
+      <div class="field">
+        <label for="f-name">Vārds</label>
+        <input id="f-name" name="name" type="text" autocomplete="name" required>
       </div>
       <div class="field">
-        <label for="f-message">Kas jūs šobrīd neapmierina vai ko vēlaties uzlabot?</label>
-        <textarea id="f-message" name="message" rows="5" maxlength="5000" placeholder="Piemēram: nav skaidrs, kur tiek tērēti uzkrājumi; ilgi jāgaida uz remontdarbiem..."></textarea>
+        <label for="f-email">E-pasts</label>
+        <input id="f-email" name="email" type="email" autocomplete="email" required>
       </div>
-      <div class="field-check">
-        <input id="f-consent" name="consent" type="checkbox" value="Jā" required>
-        <label for="f-consent">Piekrītu datu apstrādei saskaņā ar <a href="privatuma-politika.html" target="_blank" rel="noopener">privātuma politiku</a> <span class="req" aria-hidden="true">*</span></label>
+      <div class="field">
+        <label for="f-message">Ziņa</label>
+        <textarea id="f-message" name="message" rows="5" required></textarea>
       </div>
-      <!-- Aizsardzība pret surogātpastu: cilvēki šo lauku neredz un neaizpilda -->
-      <div class="visually-hidden" aria-hidden="true">
-        <label for="f-gotcha">Neaizpildīt</label>
-        <input id="f-gotcha" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
-      </div>
-      <p class="form-note"><span class="req">*</span> obligāti aizpildāmie lauki</p>
-      <button class="btn btn-primary btn-lg" type="submit">Nosūtīt pieteikumu →</button>
+      <button class="btn btn-primary btn-lg" type="submit">Nosūtīt</button>
       <p class="form-status" role="status" aria-live="polite"></p>
     </form>
   </div>
