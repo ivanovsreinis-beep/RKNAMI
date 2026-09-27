@@ -35,6 +35,40 @@
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <meta name="theme-color" content="#222A31">
 
+  <!-- Strukturētie dati (Schema.org LocalBusiness) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "SIA RK NAMI",
+    "image": "https://rknami.lv/assets/logo-full.png",
+    "url": "https://rknami.lv",
+    "telephone": "+37126609366",
+    "email": "info@rknami.lv",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Ozolkalni",
+      "addressLocality": "Mārupes pagasts",
+      "addressRegion": "Mārupes novads",
+      "postalCode": "LV-2167",
+      "addressCountry": "LV"
+    },
+    "areaServed": [
+      { "@type": "City", "name": "Rīga" },
+      { "@type": "City", "name": "Jūrmala" },
+      { "@type": "City", "name": "Mārupe" }
+    ],
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "08:00",
+      "closes": "17:00"
+    },
+    "priceRange": "$$",
+    "description": "SIA RK NAMI ir dzīvojamo māju apsaimniekošanas uzņēmums ar vairāk nekā 15 gadu pieredzi. Apsaimniekojam vairāk nekā 15 daudzdzīvokļu ēkas Rīgā, Jūrmalā, Mārupē un apkārtnē."
+  }
+  </script>
+
   <!-- Šrifti: pašmitināti (@font-face css/style.css sākumā). Hero virsraksta
        Archivo apakškopas ielādē uzreiz, lai fonta nomaiņa notiek pēc iespējas ātrāk. -->
   <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
