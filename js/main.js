@@ -4,7 +4,8 @@
    3. Mobilā izvēlne
    4. Aktīvā sadaļa izvēlnē
    5. Parādīšanās ritinot
-   6. Kontaktforma (POST /api/contact → Mailjet) */
+   6. Kontaktforma (POST /api/contact → Mailjet)
+   7. Sīkdatņu piekrišana + analītika tikai pēc piekrišanas */
 
 (function () {
   'use strict';
@@ -217,4 +218,108 @@
         .then(function () { setBusy(false); });
     });
   });
+
+  /* ---------- 7. Sīkdatņu piekrišana ----------
+     Baneri ģenerē šeit, nevis katrā HTML failā — main.js ielādē visas lapas.
+     Pēc noklusējuma darbojas tikai nepieciešamās funkcijas; analītika tiek
+     ielādēta vienīgi pēc "Piekrītu visām". Izvēle: localStorage
+     "rknami_cookie_consent" = "all" | "necessary". */
+  var CONSENT_KEY = 'rknami_cookie_consent';
+  var analyticsLoaded = false;
+
+  function readConsent() {
+    try { return localStorage.getItem(CONSENT_KEY); } catch (e) { return null; }
+  }
+
+  function saveConsent(value) {
+    try { localStorage.setItem(CONSENT_KEY, value); } catch (e) { /* privātais režīms — izvēle derēs tikai šai lapai */ }
+  }
+
+  function loadScript(src) {
+    var s = document.createElement('script');
+    s.src = src;
+    s.defer = true;
+    document.head.appendChild(s);
+  }
+
+  function loadAnalytics() {
+    if (analyticsLoaded) return;
+    analyticsLoaded = true;
+
+    // Vercel Web Analytics
+    loadScript('/_vercel/insights/script.js');
+
+    /* Google Analytics / GTM — ievietot ŠEIT, lai tie ielādētos tikai pēc piekrišanas.
+       Piemērs (GA4, aizstāt G-XXXXXXX ar īsto ID):
+         window.dataLayer = window.dataLayer || [];
+         window.gtag = function () { dataLayer.push(arguments); };
+         gtag('js', new Date());
+         gtag('config', 'G-XXXXXXX');
+         loadScript('https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX');
+       GTM gadījumā: loadScript('https://www.googletagmanager.com/gtm.js?id=GTM-XXXXXXX')
+       pēc dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' }).
+       Tos pašus skriptus NEDRĪKST likt HTML <head> — tad tie ielādētos bez piekrišanas. */
+  }
+
+  function showConsentBanner() {
+    if (document.querySelector('.consent')) return;
+
+    var banner = document.createElement('section');
+    banner.className = 'consent';
+    banner.setAttribute('aria-labelledby', 'consent-title');
+    banner.innerHTML =
+      '<div class="consent-text">' +
+        '<h2 id="consent-title" class="consent-title">Sīkdatnes un apmeklējumu statistika</h2>' +
+        '<p>Mājaslapa izmanto tikai tās darbībai nepieciešamās sīkdatnes. Ja piekrītat, ieslēgsim arī anonīmu apmeklējumu statistiku, kas palīdz mums uzlabot vietni. Sīkāk — <a href="/privatuma-politika#pp-8">privātuma politikā</a>.</p>' +
+      '</div>' +
+      '<div class="consent-actions">' +
+        '<button type="button" class="btn btn-primary" data-consent="all">Piekrītu visām</button>' +
+        '<button type="button" class="btn btn-ghost" data-consent="necessary">Noraidīt analītiku</button>' +
+      '</div>';
+    document.body.appendChild(banner);
+
+    // WhatsApp poga paceļas virs banera (sk. .consent-open style.css)
+    function syncOffset() {
+      root.style.setProperty('--consent-offset', banner.offsetHeight + 'px');
+    }
+    syncOffset();
+    var ro = 'ResizeObserver' in window ? new ResizeObserver(syncOffset) : null;
+    if (ro) ro.observe(banner);
+    else window.addEventListener('resize', syncOffset);
+    root.classList.add('consent-open');
+    requestAnimationFrame(function () { banner.classList.add('is-visible'); });
+
+    banner.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-consent]');
+      if (!btn) return;
+      var choice = btn.getAttribute('data-consent');
+      saveConsent(choice);
+      if (choice === 'all') loadAnalytics();
+
+      if (ro) ro.disconnect();
+      else window.removeEventListener('resize', syncOffset);
+      root.classList.remove('consent-open');
+      banner.classList.remove('is-visible');
+      var removed = false;
+      function remove() { if (!removed) { removed = true; banner.remove(); } }
+      banner.addEventListener('transitionend', remove);
+      setTimeout(remove, 400);
+    });
+  }
+
+  function initConsent() {
+    var consent = readConsent();
+    if (consent === 'all') loadAnalytics();
+    else if (consent !== 'necessary') showConsentBanner();
+
+    // Privātuma politikā: poga "Mainīt sīkdatņu izvēli" (piekrišanu jāvar atsaukt tikpat viegli)
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('[data-consent-reset]')) return;
+      try { localStorage.removeItem(CONSENT_KEY); } catch (err) { /* nav pieejams */ }
+      showConsentBanner();
+    });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initConsent);
+  else initConsent();
 })();

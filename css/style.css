@@ -3,7 +3,7 @@
    Saturs:  0. Tokeni un krāsu varianti   1. Bāze   2. Pogas
             3. Header   4. Hero   5. Par mums   6. Pakalpojumi
             7. Objekti   8. Pārņemšana   9. BUJ   10. Kontakti
-            11. Footer   12. Kustība
+            11. Footer   11b. Sīkdatņu baneris   12. Kustība
    ========================================================================== */
 
 /* ---------- Šrifti (pašmitināti, /fonts) ----------
@@ -1151,6 +1151,77 @@ h1, h2, h3 {
   .footer-legal { text-align: right; }
 }
 
+/* ---------- 11b. Sīkdatņu baneris (ģenerē js/main.js) ----------
+   Peldošais slānis: tāda pati virsma kā pārējām "paceltajām" kartēm,
+   zem galvenes (100), virs WhatsApp pogas (90). */
+.consent {
+  position: fixed;
+  left: max(var(--gutter), env(safe-area-inset-left));
+  right: max(var(--gutter), env(safe-area-inset-right));
+  bottom: max(var(--s-2), env(safe-area-inset-bottom));
+  z-index: 95;
+  display: grid;
+  gap: var(--s-3);
+  max-width: 60rem;
+  margin-inline: auto;
+  padding: var(--s-3);
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-float);
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.35s var(--ease-out), transform 0.5s var(--spring);
+}
+.consent.is-visible { opacity: 1; transform: none; }
+
+.consent-title {
+  font-size: var(--step-1);
+  font-stretch: 112%;
+  font-variation-settings: "wdth" 112;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  margin-bottom: var(--s-1);
+}
+.consent-text p {
+  margin: 0;
+  max-width: 38rem;
+  color: var(--ink-2);
+  font-size: var(--step--1);
+  line-height: 1.6;
+}
+.consent-text a {
+  color: var(--accent-strong);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.consent-text a:hover { color: var(--ink); }
+
+/* Mobilē pogas zem teksta, pilnā platumā, ≥48px pieskāriena laukums */
+.consent-actions {
+  display: grid;
+  gap: 0.75rem;
+}
+.consent-actions .btn { min-height: 48px; width: 100%; }
+
+@media (min-width: 760px) {
+  .consent {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: var(--s-4);
+    padding: var(--s-3) var(--s-4);
+    bottom: max(var(--s-3), env(safe-area-inset-bottom));
+  }
+  .consent-actions { grid-auto-flow: column; }
+  .consent-actions .btn { width: auto; white-space: nowrap; }
+}
+
+/* Kamēr baneris redzams, WhatsApp poga paceļas virs tā */
+.consent-open .whatsapp-fab { translate: 0 calc(-1 * (var(--consent-offset, 0px) + var(--s-2))); }
+
+@media print { .consent { display: none; } }
+
 /* ---------- 12. Kustība ---------- */
 /* Vienīgais "orķestrētais" brīdis: ēkas paceļas ielādējot lapu */
 .js .elevation .bld {
@@ -1184,7 +1255,7 @@ h1, h2, h3 {
   background: #25D366;
   color: #FFFFFF;
   box-shadow: 0 2px 4px rgba(34, 42, 49, 0.12), 0 8px 20px -6px rgba(18, 140, 126, 0.45);
-  transition: transform 0.3s var(--spring), box-shadow 0.3s var(--ease-out);
+  transition: transform 0.3s var(--spring), box-shadow 0.3s var(--ease-out), translate 0.5s var(--spring);
 }
 .whatsapp-fab svg { width: 30px; height: 30px; }
 .whatsapp-fab:hover {
